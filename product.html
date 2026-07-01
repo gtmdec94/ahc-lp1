@@ -23,7 +23,7 @@
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{font-family:'Poppins',system-ui,sans-serif;color:var(--body);background:var(--white);
-    font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:clip}
   h1,h2,h3,h4{color:var(--ink);font-weight:700;line-height:1.14;letter-spacing:-.02em}
   a{color:inherit;text-decoration:none}
   img{display:block;max-width:100%}
@@ -313,19 +313,10 @@
         <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>Ultrasonically sealed seams</span>
         <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg>EO sterilised (ISO 11135)</span>
       </div>
-    </div>
 
-  </div>
-</section>
-
-<!-- ===== COLLAPSIBLE DETAIL SECTIONS: Pack Components → Technical Specification → Packaging & Supply ===== -->
-<section class="details-sec">
-  <div class="wrap">
-    <div class="sec-h">
-      <span class="kicker">Product Details</span>
-      <h2>Everything in this pack</h2>
-    </div>
-    <div class="acc-wrap">
+      <!-- Product Details — now in the right column, under At a Glance -->
+      <div class="block-label" style="margin-top:32px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5" stroke-linecap="round"/></svg>Product Details</div>
+      <div class="acc-wrap">
 
       <!-- 1. PACK COMPONENTS (open by default) -->
       <div class="acc open">
@@ -383,7 +374,9 @@
         </div></div>
       </div>
 
+      </div>
     </div>
+
   </div>
 </section>
 
