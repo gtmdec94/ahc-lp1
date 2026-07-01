@@ -96,7 +96,11 @@
   .shop .wrap{display:grid;grid-template-columns:260px 1fr;gap:38px;align-items:start}
 
   /* ---------- FILTER SIDEBAR ---------- */
-  .filters{position:sticky;top:152px}
+  .filters{position:sticky;top:152px;max-height:calc(100vh - 152px - 24px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#cfd9e2 transparent;padding-right:6px}
+  .filters::-webkit-scrollbar{width:7px}
+  .filters::-webkit-scrollbar-thumb{background:#cfd9e2;border-radius:8px}
+  .filters::-webkit-scrollbar-thumb:hover{background:#b3c1cd}
+  .filters::-webkit-scrollbar-track{background:transparent}
   .fgroup{border-bottom:1px solid var(--line);padding:22px 0}
   .fgroup:first-child{padding-top:0}
   .fgroup h4{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-bottom:16px}
@@ -204,7 +208,7 @@
     .shop .wrap{grid-template-columns:1fr}
     .filter-btn{display:inline-flex}
     .sortwrap span{display:none}
-    .filters{position:fixed;top:0;left:0;bottom:0;width:min(86vw,340px);background:#fff;z-index:200;
+    .filters{position:fixed;top:0;left:0;bottom:0;width:min(86vw,340px);background:#fff;z-index:200;max-height:none;
       padding:26px 24px 30px;overflow-y:auto;transform:translateX(-100%);transition:transform var(--t);box-shadow:10px 0 40px rgba(0,0,0,.2)}
     .filters.open{transform:none}
     .filters .fdrawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
