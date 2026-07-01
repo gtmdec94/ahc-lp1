@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amaryllis Healthcare — LSCS Pack Eco - 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cyan:#309ECA; --cyan-d:#2585ad; --cyan-dd:#1f6f92;
+    --slate:#222831; --slate-2:#2c343f;
+    --surface:#F2F2F2; --light:#E8F4FA; --light-2:#f3f9fd;
+    --red:#ED2127; --green:#1f9d57;
+    --white:#fff; --ink:#222831; --body:#4b5560; --muted:#7b8694; --line:#e4e9ee;
+    --wrap:1280px; --r:14px; --r-sm:10px;
+    --sh-1:0 1px 3px rgba(34,40,49,.06),0 1px 2px rgba(34,40,49,.04);
+    --sh-2:0 18px 40px -16px rgba(34,40,49,.22);
+    --sh-cyan:0 18px 38px -14px rgba(48,158,202,.45);
+    --t:.28s cubic-bezier(.2,.7,.3,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Poppins',system-ui,sans-serif;color:var(--body);background:var(--white);
+    font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,h4{color:var(--ink);font-weight:700;line-height:1.14;letter-spacing:-.02em}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:.97rem;
+    padding:14px 26px;border-radius:60px;cursor:pointer;border:2px solid transparent;
+    transition:transform var(--t),box-shadow var(--t),background var(--t),color var(--t);white-space:nowrap}
+  .btn svg{width:17px;height:17px}
+  .btn-primary{background:var(--cyan);color:#fff;box-shadow:var(--sh-cyan)}
+  .btn-primary:hover{background:var(--cyan-d);transform:translateY(-2px)}
+  .btn-outline{background:transparent;color:var(--cyan);border-color:#cfe6f2}
+  .btn-outline:hover{border-color:var(--cyan);background:var(--light);transform:translateY(-2px)}
+  .btn-white{background:#fff;color:var(--cyan-dd)}
+  .btn-white:hover{transform:translateY(-2px);box-shadow:0 16px 34px -14px rgba(0,0,0,.35)}
+
+  /* NAV */
+  header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.86);
+    backdrop-filter:saturate(160%) blur(12px);border-bottom:1px solid transparent;transition:box-shadow var(--t),border-color var(--t),background var(--t)}
+  header.scrolled{box-shadow:0 6px 24px -14px rgba(34,40,49,.28);border-color:var(--line);background:rgba(255,255,255,.96)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:78px;transition:height var(--t)}
+  header.scrolled .nav{height:66px}
+  .brand img{height:40px;width:auto}
+  .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+  .nav-links a{font-weight:500;font-size:.97rem;color:var(--slate);position:relative;padding:6px 0;transition:color var(--t)}
+  .nav-links a.active{color:var(--cyan)}
+  .nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--cyan);transition:right var(--t)}
+  .nav-links a:hover{color:var(--cyan)}
+  .nav-links a:hover::after,.nav-links a.active::after{right:0}
+  .nav-right{display:flex;align-items:center;gap:18px}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+  .burger span{width:24px;height:2px;background:var(--slate);border-radius:2px}
+  .mobile-menu{display:none}
+
+  /* BREADCRUMB */
+  .crumbbar{padding-top:98px;background:var(--light-2);border-bottom:1px solid var(--line)}
+  .crumb{display:flex;align-items:center;flex-wrap:wrap;gap:9px;font-size:.84rem;color:var(--muted);font-weight:500;padding:15px 0}
+  .crumb a:hover{color:var(--cyan)}
+  .crumb svg{width:14px;height:14px;opacity:.6}
+  .crumb .here{color:var(--slate);font-weight:600}
+
+  /* ===== PDP HERO ===== */
+  .pdp{padding:40px 0 16px}
+  .pdp-grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,1fr);gap:54px;align-items:start}
+
+  .gallery{position:sticky;top:96px}
+  .gframe{border-radius:18px;overflow:hidden;background:linear-gradient(150deg,#eef7fc,#dcecf5);
+    border:1px solid #e0ecf3;box-shadow:var(--sh-2);aspect-ratio:1/1;position:relative}
+  .gframe img{width:100%;height:100%;object-fit:cover}
+  .gcap{display:flex;align-items:center;gap:9px;margin-top:13px;font-size:.84rem;color:var(--muted);font-style:italic}
+  .gcap svg{width:15px;height:15px;color:var(--cyan);flex-shrink:0}
+
+  /* RIGHT */
+  .pd-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+  .pd-eyebrow .sku{color:var(--muted);border-left:1px solid var(--line);padding-left:10px}
+  .pd-title{font-size:clamp(1.95rem,3vw,2.6rem);font-weight:800;color:var(--slate);margin-bottom:14px}
+
+  /* cert tags under product name (client: certs as tags on top) */
+  .pd-certs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .pd-certs .ct{display:inline-flex;align-items:center;gap:7px;font-size:.78rem;font-weight:600;color:var(--cyan-dd);
+    background:var(--light);border:1px solid #cfe6f2;border-radius:8px;padding:7px 12px}
+  .pd-certs .ct svg{width:14px;height:14px;color:var(--cyan)}
+
+  .pd-status{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:20px}
+  .pd-status span{display:inline-flex;align-items:center;gap:7px;font-size:.82rem;font-weight:600;color:var(--slate-2);
+    background:#fff;border:1.5px solid var(--line);border-radius:60px;padding:8px 15px}
+  .pd-status .ok{color:#157347;border-color:#bce3cd;background:#f1faf4}
+  .pd-status svg{width:14px;height:14px}
+  .pd-status .ok svg{color:var(--green)}
+  .pd-desc{font-size:1.02rem;color:var(--body);margin-bottom:24px}
+
+  /* CTA (moved up — right under description) */
+  .pd-cta{background:var(--light-2);border:1px solid #dbeaf2;border-radius:var(--r);padding:22px;margin-bottom:26px}
+  .pd-cta .row{display:flex;gap:12px;flex-wrap:wrap}
+  .pd-cta .btn{flex:1;min-width:170px}
+  .pd-cta .reassure{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:16px;font-size:.84rem;color:var(--muted);font-weight:500}
+  .pd-cta .reassure span{display:inline-flex;align-items:center;gap:6px}
+  .pd-cta .reassure svg{width:14px;height:14px;color:var(--green)}
+
+  /* HIGHLIGHT chips (real feature-derived) */
+  .block-label{display:flex;align-items:center;gap:9px;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--slate);margin-bottom:14px}
+  .block-label svg{width:16px;height:16px;color:var(--cyan)}
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;font-weight:600;color:var(--cyan-dd);
+    background:var(--light);border:1px solid #cfe6f2;border-radius:10px;padding:9px 14px}
+  .chip svg{width:15px;height:15px;color:var(--cyan)}
+
+  /* ===== COLLAPSIBLE DETAIL SECTIONS ===== */
+  .details-sec{padding:52px 0 8px}
+  .details-sec .sec-h{max-width:920px;margin:0 auto 22px}
+  .details-sec .kicker{font-size:.76rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:8px}
+  .details-sec .sec-h h2{font-size:clamp(1.5rem,2.4vw,2rem);color:var(--slate)}
+  .acc-wrap{max-width:920px;margin:0 auto}
+  .acc{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:14px;background:#fff;box-shadow:var(--sh-1)}
+  .acc-head{display:flex;align-items:center;gap:14px;width:100%;padding:19px 22px;cursor:pointer;background:#fff;border:0;text-align:left;font-family:inherit;transition:background var(--t)}
+  .acc-head:hover{background:var(--light-2)}
+  .acc-head .ic{width:42px;height:42px;border-radius:11px;background:var(--light);color:var(--cyan);display:grid;place-items:center;flex-shrink:0}
+  .acc-head .ic svg{width:22px;height:22px}
+  .acc-head .tt{flex:1}
+  .acc-head .tt b{display:block;font-size:1.06rem;font-weight:700;color:var(--slate)}
+  .acc-head .tt small{font-size:.82rem;color:var(--muted);font-weight:500}
+  .acc-head .chev{width:22px;height:22px;color:var(--muted);transition:transform var(--t);flex-shrink:0}
+  .acc.open .acc-head .chev{transform:rotate(180deg)}
+  .acc-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
+  .acc.open .acc-body{max-height:1400px}
+  .acc-inner{padding:2px 22px 24px}
+
+  /* components table */
+  .comp{width:100%;border-collapse:collapse;font-size:.93rem}
+  .comp thead th{text-align:left;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;padding:0 14px 11px 0;border-bottom:2px solid var(--line)}
+  .comp tbody td{padding:13px 14px 13px 0;border-bottom:1px solid var(--line);color:var(--slate-2)}
+  .comp tbody tr:last-child td{border-bottom:0}
+  .comp tbody td:first-child{font-weight:600;color:var(--slate)}
+  .comp .qty{color:var(--cyan-dd);font-weight:700;white-space:nowrap}
+
+  /* spec rows */
+  .spec{width:100%;border-collapse:collapse}
+  .spec tr{border-top:1px solid var(--line)}
+  .spec tr:first-child{border-top:0}
+  .spec th{text-align:left;font-size:.92rem;font-weight:500;color:var(--muted);padding:13px 0;width:42%;vertical-align:top}
+  .spec td{font-size:.95rem;color:var(--slate-2);padding:13px 0;font-weight:600}
+  .note-line{font-size:.85rem;color:var(--muted);margin-top:16px;display:flex;gap:8px;align-items:flex-start;line-height:1.5}
+  .note-line svg{width:15px;height:15px;color:var(--cyan);flex-shrink:0;margin-top:3px}
+
+  /* ===== FEATURES ===== */
+  .section{padding:60px 0}
+  .section.alt{background:var(--light-2)}
+  .kicker{font-size:.76rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:12px}
+  .sec-title{font-size:clamp(1.6rem,2.6vw,2.15rem);font-weight:700;color:var(--slate)}
+  .feat-wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:46px;align-items:start;margin-top:14px}
+  .feat-list{list-style:none;display:grid;gap:15px}
+  .feat-list li{display:flex;gap:14px;font-size:.98rem;color:var(--slate-2)}
+  .feat-list .tick{width:26px;height:26px;border-radius:8px;background:var(--light);color:var(--cyan);display:grid;place-items:center;flex-shrink:0;margin-top:1px}
+  .feat-list .tick svg{width:15px;height:15px}
+  .std-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:var(--sh-1)}
+  .std-card h4{font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);margin-bottom:18px;display:flex;align-items:center;gap:9px}
+  .std-card h4 svg{width:17px;height:17px;color:var(--cyan)}
+  .std-list{display:grid;gap:12px}
+  .std{display:flex;align-items:center;gap:13px;padding:13px 15px;border:1px solid var(--line);border-radius:11px;transition:var(--t)}
+  .std:hover{border-color:var(--cyan);background:var(--light-2)}
+  .std .seal{width:38px;height:38px;border-radius:9px;background:var(--light);color:var(--cyan);display:grid;place-items:center;flex-shrink:0}
+  .std .seal svg{width:20px;height:20px}
+  .std b{display:block;font-size:.92rem;color:var(--slate);font-weight:600}
+  .std small{font-size:.78rem;color:var(--muted)}
+
+  /* CTA band */
+  .cta{background:linear-gradient(120deg,var(--cyan) 0%,var(--cyan-d) 100%);color:#fff;text-align:center;position:relative;overflow:hidden}
+  .cta::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 220px at 80% 120%,rgba(255,255,255,.16),transparent 60%)}
+  .cta .wrap{padding-top:70px;padding-bottom:70px;position:relative}
+  .cta h2{color:#fff;font-size:clamp(1.7rem,3vw,2.4rem)}
+  .cta p{color:rgba(255,255,255,.9);font-size:1.05rem;margin:14px auto 30px;max-width:540px}
+  .cta .grp{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  /* footer */
+  footer{background:var(--slate);color:#c3ccd6;font-size:.92rem}
+  .foot-main{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:40px;padding-top:70px;padding-bottom:46px}
+  .foot-brand img{height:42px;width:auto;margin-bottom:6px}
+  .foot-brand p{margin:14px 0;color:#9aa6b2;max-width:300px;font-size:.9rem}
+  footer h4{color:#fff;font-size:.84rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+  .foot-col ul{list-style:none}
+  .foot-col li{margin-bottom:10px}
+  .foot-col a{color:#a9b4bf;transition:color var(--t);font-size:.9rem}
+  .foot-col a:hover{color:var(--cyan)}
+  .foot-contact p{color:#a9b4bf;font-size:.9rem;margin-bottom:10px;display:flex;gap:10px;align-items:flex-start}
+  .foot-contact svg{width:16px;height:16px;color:var(--cyan);flex-shrink:0;margin-top:3px}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding:22px 0;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+  .certs{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .certs span{font-size:.74rem;font-weight:600;color:#cdd5dd;border:1px solid rgba(255,255,255,.18);padding:5px 12px;border-radius:6px}
+  .foot-bottom .meta{font-size:.82rem;color:#8d99a6}
+  .foot-bottom .meta b{color:#b6bfc9;font-weight:600}
+
+  .mcta{display:none}
+  @media(max-width:1080px){.nav-links{gap:24px}}
+  @media(max-width:880px){
+    .nav-links,.nav-right .btn{display:none}
+    .burger{display:flex}
+    .pdp-grid{grid-template-columns:1fr;gap:30px}
+    .gallery{position:static}
+    .feat-wrap{grid-template-columns:1fr;gap:30px}
+    .mobile-menu.open{display:block;position:fixed;top:0;right:0;bottom:0;width:min(82vw,340px);background:#fff;z-index:200;box-shadow:-10px 0 40px rgba(0,0,0,.2);padding:90px 30px 30px}
+    .mobile-menu a{display:block;padding:14px 0;font-size:1.06rem;font-weight:500;color:var(--slate);border-bottom:1px solid var(--line)}
+    .mm-close{position:absolute;top:26px;right:26px;background:none;border:0;font-size:1.8rem;cursor:pointer;color:var(--slate)}
+    body{padding-bottom:74px}
+    .mcta{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:120;background:#fff;box-shadow:0 -8px 24px rgba(34,40,49,.16);padding:10px 14px;gap:10px;align-items:center;border-top:1px solid var(--line)}
+    .mcta .btn{flex:1;padding:13px 18px}
+    .mcta .call{width:48px;height:48px;flex-shrink:0;border-radius:12px;background:var(--light);color:var(--cyan);display:grid;place-items:center}
+    .mcta .call svg{width:22px;height:22px}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 20px}
+    .pd-cta .btn{min-width:100%}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="wrap nav">
+    <a class="brand" href="/"><img src="https://www.amaryllishealthcare.com/Amaryllislogo.png" alt="Amaryllis Healthcare"></a>
+    <ul class="nav-links">
+      <li><a href="/#products" class="active">Products</a></li>
+      <li><a href="/#capabilities">Capabilities</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#careers">Careers</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#enquiry" class="btn btn-primary">Request a Catalog
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobileMenu">
+  <button class="mm-close" id="mmClose" aria-label="Close menu">&times;</button>
+  <a href="/#products">Products</a><a href="/#capabilities">Capabilities</a><a href="/#about">About</a><a href="/#careers">Careers</a><a href="/#contact">Contact</a>
+  <a href="#enquiry" class="btn btn-primary">Request a Catalog</a>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="crumbbar">
+  <div class="wrap">
+    <div class="crumb">
+      <a href="/">Home</a>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <a href="/#products">Products</a>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <a href="/surgical-packs.html">Surgical Packs</a>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="here">LSCS Pack Eco - 1</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PDP HERO ===== -->
+<section class="pdp">
+  <div class="wrap pdp-grid">
+
+    <!-- LEFT: sticky image (freezes on scroll) -->
+    <div class="gallery">
+      <div class="gframe">
+        <img src="https://strapi.amaryllishealthcare.com/uploads/large_Economical_lscs_surgical_pack_disposable_a2ebf5128e.jpeg" alt="LSCS OT Pack prepared for caesarean delivery">
+      </div>
+      <div class="gcap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 15l5-4 4 3 3-2 6 4" stroke-linejoin="round"/></svg>Economical LSCS surgical pack, disposable</div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="details">
+      <div class="pd-eyebrow">Surgical Packs · Gynaecology <span class="sku">SKU · AHGYCSE30</span></div>
+      <h1 class="pd-title">LSCS Pack Eco - 1</h1>
+
+      <!-- certifications as tags under the product name -->
+      <div class="pd-certs">
+        <span class="ct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 2l8 4v5c0 5-3.4 8.5-8 11-4.6-2.5-8-6-8-11V6l8-4z" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>ISO 13485:2016</span>
+        <span class="ct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="9"/><path d="M15 9a3.5 3.5 0 100 6" stroke-linecap="round"/></svg>CE Marked</span>
+        <span class="ct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 3l7 3v6c0 4-3 6.5-7 8-4-1.5-7-4-7-8V6l7-3z" stroke-linejoin="round"/></svg>CDSCO Approved</span>
+      </div>
+
+      <div class="pd-status">
+        <span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"/></svg>Sterile</span>
+        <span class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"/></svg>Single Use</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v5c0 5-3.4 8.5-8 11-4.6-2.5-8-6-8-11V6l8-4z" stroke-linejoin="round"/></svg>AAMI Level 3</span>
+      </div>
+
+      <p class="pd-desc">LSCS OT Pack meant to protect patient from the spread of infections during Caesarean. Pack designed with the latest generation SMS technology — medical-grade SMS fabric that meets AAMI Level 3 standards of barrier protection and prevents blood strike-through &amp; fluid contamination.</p>
+
+      <!-- CTA moved up: right under the description -->
+      <div class="pd-cta" id="enquiry">
+        <div class="row">
+          <a href="#" class="btn btn-primary">Request a Catalog
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="#" class="btn btn-outline">Request a Sample</a>
+        </div>
+        <div class="reassure">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"/></svg>Reply within 1 business day</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"/></svg>Export to 15+ countries</span>
+        </div>
+      </div>
+
+      <!-- At a glance (real feature-derived) -->
+      <div class="block-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9 2.6.9-5.5-4-3.9 5.5-.8L12 3z" stroke-linejoin="round"/></svg>At a glance</div>
+      <div class="chips">
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v4H4zM4 14h16v4H4z" stroke-linejoin="round"/></svg>Medical-grade SMS fabric</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v5c0 5-3.4 8.5-8 11-4.6-2.5-8-6-8-11V6l8-4z" stroke-linejoin="round"/></svg>AAMI Level 3 barrier</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M8 8l-4 4 4 4M16 8l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>Ultrasonically sealed seams</span>
+        <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg>EO sterilised (ISO 11135)</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== COLLAPSIBLE DETAIL SECTIONS: Pack Components → Technical Specification → Packaging & Supply ===== -->
+<section class="details-sec">
+  <div class="wrap">
+    <div class="sec-h">
+      <span class="kicker">Product Details</span>
+      <h2>Everything in this pack</h2>
+    </div>
+    <div class="acc-wrap">
+
+      <!-- 1. PACK COMPONENTS (open by default) -->
+      <div class="acc open">
+        <button class="acc-head">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 8l9-5 9 5-9 5-9-5z" stroke-linejoin="round"/><path d="M3 8v8l9 5 9-5V8M12 13v8" stroke-linejoin="round"/></svg></span>
+          <span class="tt"><b>Pack Components</b><small>What's inside the sterile pack</small></span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-body"><div class="acc-inner">
+          <table class="comp">
+            <thead><tr><th>Component</th><th>Qty</th><th>Size</th></tr></thead>
+            <tbody>
+              <tr><td>Surgeon Gown</td><td class="qty">2</td><td>128 × 160 cm</td></tr>
+              <tr><td>Caesarean Drape</td><td class="qty">1</td><td>300 × 160 cm</td></tr>
+              <tr><td>Small Drape</td><td class="qty">2</td><td>80 × 100 cm</td></tr>
+              <tr><td>Baby Receiving Drape</td><td class="qty">1</td><td>50 × 60 cm</td></tr>
+              <tr><td>Hand Towel</td><td class="qty">2</td><td>30 × 30 cm</td></tr>
+            </tbody>
+          </table>
+        </div></div>
+      </div>
+
+      <!-- 2. TECHNICAL SPECIFICATION -->
+      <div class="acc">
+        <button class="acc-head">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5h16M4 12h16M4 19h16" stroke-linecap="round"/><circle cx="8" cy="5" r="1.6"/><circle cx="15" cy="12" r="1.6"/><circle cx="10" cy="19" r="1.6"/></svg></span>
+          <span class="tt"><b>Technical Specification</b><small>Material, barrier &amp; sterility</small></span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-body"><div class="acc-inner">
+          <table class="spec">
+            <tr><th>Fabric / Material</th><td>Medical-grade SMS non-woven</td></tr>
+            <tr><th>Barrier performance</th><td>AAMI Level 3</td></tr>
+            <tr><th>Sterilisation</th><td>Ethylene Oxide (EO) · ISO 11135</td></tr>
+            <tr><th>Sterile</th><td>Yes — single-use</td></tr>
+            <tr><th>Packaging standards</th><td>ISO 11607-1 · EN 868-5</td></tr>
+            <tr><th>Speciality</th><td>Gynaecology (Caesarean / LSCS)</td></tr>
+          </table>
+        </div></div>
+      </div>
+
+      <!-- 3. PACKAGING & SUPPLY -->
+      <div class="acc">
+        <button class="acc-head">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M3 7l3-4h12l3 4M12 3v4M8 12h8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="tt"><b>Packaging &amp; Supply</b><small>For bulk procurement planning</small></span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="acc-body"><div class="acc-inner">
+          <table class="spec">
+            <tr><th>Packs per box (outer packing)</th><td>8 Nos</td></tr>
+            <tr><th>Towels per pack</th><td>6 Nos</td></tr>
+          </table>
+          <div class="note-line"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01" stroke-linecap="round"/></svg>Carton dimensions, weight and minimum order quantity are shared on request, as these can vary by order and destination.</div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES + STANDARDS (real) ===== -->
+<section class="section alt">
+  <div class="wrap">
+    <span class="kicker">Product Features</span>
+    <h2 class="sec-title">Engineered for the caesarean theatre</h2>
+    <div class="feat-wrap">
+      <ul class="feat-list">
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Surgeon gowns made of medical-grade SMS fabric, meeting AAMI Level 3 barrier protection — preventing blood strike-through &amp; fluid contamination.</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Large &amp; wide surgical drape to sufficiently cover the patient.</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ultrasonically sealed seams prevent strike-through.</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Caesarean drape comes with a wide collection pouch and suction port.</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Sufficient fenestration with incise — easier accessibility while retaining sterility of un-accessed fenestrations.</li>
+        <li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"/></svg></span>EO sterilised per ISO 11135, using medical-grade packaging that meets ISO 11607-1 and EN 868-5 requirements.</li>
+      </ul>
+      <div class="std-card">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v5c0 5-3.4 8.5-8 11-4.6-2.5-8-6-8-11V6l8-4z" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>Standards met</h4>
+        <div class="std-list">
+          <div class="std"><div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v5c0 5-3.4 8.5-8 11-4.6-2.5-8-6-8-11V6l8-4z" stroke-linejoin="round"/></svg></div><div><b>AAMI Level 3</b><small>Barrier protection</small></div></div>
+          <div class="std"><div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><b>ISO 11135</b><small>EO sterilisation</small></div></div>
+          <div class="std"><div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4h9l3 3v13H6z" stroke-linejoin="round"/><path d="M9 12h6M9 16h6" stroke-linecap="round"/></svg></div><div><b>ISO 11607-1</b><small>Sterile barrier packaging</small></div></div>
+          <div class="std"><div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4h9l3 3v13H6z" stroke-linejoin="round"/><path d="M9 12h6M9 16h6" stroke-linecap="round"/></svg></div><div><b>EN 868-5</b><small>Packaging material</small></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta">
+  <div class="wrap">
+    <h2>Request a quote for this pack</h2>
+    <p>Share your facility and volumes — our team responds within one business day with documentation and a catalogue.</p>
+    <div class="grp">
+      <a href="#enquiry" class="btn btn-white">Request a Catalog
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="/surgical-packs.html" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,.5)">View all Surgical Packs</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-main">
+      <div class="foot-brand">
+        <img src="https://www.amaryllishealthcare.com/assets/footerlogo-BDPcI4FA.png" alt="Amaryllis Healthcare">
+        <p>Manufacturer of sterile surgical disposables — gowns, drapes, packs, devices and CSSD solutions — supplying hospitals and distributors across 15+ countries.</p>
+      </div>
+      <div class="foot-col"><h4>Quick Links</h4><ul><li><a href="/#products">Products</a></li><li><a href="/#capabilities">Capabilities</a></li><li><a href="/#about">About</a></li><li><a href="/#careers">Careers</a></li><li><a href="/#contact">Contact</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div class="foot-col"><h4>Categories</h4><ul><li><a href="/surgical-packs.html">Surgical Packs</a></li><li><a href="#">Surgical Gowns</a></li><li><a href="#">Surgical Drapes</a></li><li><a href="#">Surgical Accessories</a></li><li><a href="#">Medical Devices</a></li><li><a href="#">Protective Essentials</a></li></ul></div>
+      <div class="foot-col foot-contact"><h4>Contact</h4>
+        <p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.5-7-11a7 7 0 1114 0c0 5.5-7 11-7 11z" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.5"/></svg>Bommasandra Industrial Area, Bengaluru, Karnataka 560099, India</p>
+        <p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 6l8 6 8-6" stroke-linecap="round" stroke-linejoin="round"/></svg>info@amaryllishealthcare.com</p>
+        <p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a12 12 0 005 5l2-3 5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke-linejoin="round"/></svg>+91 9169 338 338</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <div class="certs"><span>ISO 13485:2016</span><span>CE Marked</span><span>CDSCO</span><span>ISO 9001:2015</span></div>
+      <div class="meta">GSTIN: <b>29AAICA6581B1ZM</b> &nbsp;·&nbsp; © 2026 Amaryllis Healthcare Pvt. Ltd.</div>
+    </div>
+  </div>
+</footer>
+
+<div class="mcta">
+  <a href="#enquiry" class="btn btn-primary">Request a Catalog</a>
+  <a href="tel:+919169338338" class="call" aria-label="Call"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-3 2a12 12 0 005 5l2-3 5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke-linejoin="round"/></svg></a>
+</div>
+
+<script>
+  var hdr=document.getElementById('hdr');
+  window.addEventListener('scroll',function(){if(window.scrollY>20)hdr.classList.add('scrolled');else hdr.classList.remove('scrolled');});
+  var mm=document.getElementById('mobileMenu');
+  document.getElementById('burger').addEventListener('click',function(){mm.classList.add('open');});
+  document.getElementById('mmClose').addEventListener('click',function(){mm.classList.remove('open');});
+  document.querySelectorAll('.acc-head').forEach(function(h){
+    h.addEventListener('click',function(){h.parentElement.classList.toggle('open');});
+  });
+</script>
+</body>
+</html>

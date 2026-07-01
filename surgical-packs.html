@@ -298,6 +298,19 @@
     <aside class="filters" id="filters">
       <div class="fdrawer-head"><b>Filters</b><button id="filterClose" aria-label="Close filters">&times;</button></div>
 
+      <!-- 1st: Speciality (Solution Capabilities) -->
+      <div class="fgroup">
+        <h4>Speciality</h4>
+        <label class="opt"><input type="checkbox"><span>Cardiac</span></label>
+        <label class="opt"><input type="checkbox"><span>Orthopaedics</span></label>
+        <label class="opt"><input type="checkbox"><span>Gynaecology</span></label>
+        <label class="opt"><input type="checkbox"><span>Neuro</span></label>
+        <label class="opt"><input type="checkbox"><span>General Surgery</span></label>
+        <label class="opt"><input type="checkbox"><span>Urology</span></label>
+        <p style="font-size:.76rem;color:var(--muted);margin-top:10px;line-height:1.45">Sample list — final specialties to be confirmed with your team, then mapped to products.</p>
+      </div>
+
+      <!-- 2nd: Category -->
       <div class="fgroup">
         <h4>Category</h4>
         <ul class="fcat">
@@ -311,33 +324,11 @@
         </ul>
       </div>
 
+      <!-- 3rd: Sterilisation -->
       <div class="fgroup">
         <h4>Sterilisation</h4>
         <label class="opt"><input type="checkbox" checked><span>Sterile</span><span class="n">52</span></label>
         <label class="opt"><input type="checkbox"><span>Non-sterile</span><span class="n">4</span></label>
-      </div>
-
-      <div class="fgroup">
-        <h4>Size</h4>
-        <div class="chipwrap">
-          <span class="chip">Small</span><span class="chip on">Medium</span><span class="chip">Large</span>
-          <span class="chip">X-Large</span><span class="chip">Universal</span>
-        </div>
-      </div>
-
-      <div class="fgroup">
-        <h4>Single Use</h4>
-        <label class="opt"><input type="checkbox" checked><span>Single use</span><span class="n">56</span></label>
-        <label class="opt"><input type="checkbox"><span>Reusable</span><span class="n">0</span></label>
-      </div>
-
-      <div class="fgroup">
-        <h4>Specialty</h4>
-        <label class="opt"><input type="checkbox"><span>General Surgery</span></label>
-        <label class="opt"><input type="checkbox"><span>Obstetrics &amp; Gynae</span></label>
-        <label class="opt"><input type="checkbox"><span>Orthopaedics</span></label>
-        <label class="opt"><input type="checkbox"><span>Cardiac</span></label>
-        <label class="opt"><input type="checkbox"><span>Urology</span></label>
       </div>
 
       <span class="fclear"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>Clear all filters</span>
@@ -411,26 +402,31 @@
   var GLYPH='<svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 8l9-5 9 5-9 5-9-5z" stroke-linejoin="round"/><path d="M3 8v8l9 5 9-5V8M12 13v8" stroke-linejoin="round"/></svg>';
   var WM='<svg class="watermark" viewBox="0 0 24 24" fill="currentColor"><path d="M3 8l9-5 9 5-9 5-9-5z" opacity=".5"/></svg>';
   var STERILE='<span class="sterile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12l4 4 10-10" stroke-linecap="round" stroke-linejoin="round"/></svg>Sterile</span>';
+  // card tags limited to Fabric / Size / Sterile-Unsterile (per client). f=fabric, s=size (blank allowed), st=sterile
   var products=[
-    {n:"Economical LSCS Surgical Pack",sku:"AHGSLS10",d:"Cost-optimised caesarean pack with SMS barrier components and ultrasonically sealed seams.",m:["Medium","SMS","Single use"]},
-    {n:"ICU CVP Line Pack",sku:"AHGSIU10",d:"Central-line insertion pack for intensive care, with fenestrated drape and accessories.",m:["Universal","Sterile","Single use"]},
-    {n:"Angiography Pack (Cathlab)",sku:"AHCIAG10",d:"Cardiac cath-lab procedure pack with full-body angiography drape and table cover.",m:["Large","Sterile"]},
-    {n:"Universal Surgical Pack",sku:"AHGSUP10",d:"All-purpose general-surgery pack configurable for a wide range of procedures.",m:["Universal","SMS"]},
-    {n:"THR Patient Pack",sku:"AHORTHE21",d:"Total hip replacement pack with limb stockinette, U-drape and reinforced zones.",m:["Large","Reinforced"]},
-    {n:"General Surgery Pack",sku:"AHGSGS10",d:"Standard laparotomy pack with mayo cover, gowns and absorbent towels.",m:["Medium","Single use"]},
-    {n:"Caesarean Section Pack",sku:"AHGSCS10",d:"Obstetric LSCS pack with fluid-collection pouch and reinforced delivery drape.",m:["Medium","Sterile"]},
-    {n:"Cardiac (CABG) Pack",sku:"AHCICB10",d:"Open-heart procedure pack with split sheet, arm-board covers and large back table.",m:["X-Large","Reinforced"]},
-    {n:"Arthroscopy Pack",sku:"AHORAR10",d:"Knee/shoulder arthroscopy pack with fluid-control drape and pouch.",m:["Medium","Sterile"]},
-    {n:"Ophthalmic Cataract Pack",sku:"AHEYOP10",d:"Eye-surgery pack with aperture drape, instrument wipe and fluid pouch.",m:["Small","Single use"]},
-    {n:"Labour Room Delivery Pack",sku:"AHGSDP10",d:"Normal-delivery pack with under-buttock drape, cord clamp and baby towel.",m:["Universal","Sterile"]},
-    {n:"Laparoscopy Pack",sku:"AHGSLP10",d:"Minimal-access pack with lithotomy drape, camera-cord cover and pouches.",m:["Large","Sterile"]}
+    {n:"Economical LSCS Surgical Pack",sku:"AHGSLS10",d:"Cost-optimised caesarean pack with SMS barrier components and ultrasonically sealed seams.",f:"SMS",s:"Medium",st:true},
+    {n:"ICU CVP Line Pack",sku:"AHGSIU10",d:"Central-line insertion pack for intensive care, with fenestrated drape and accessories.",f:"SMS",s:"",st:true},
+    {n:"Angiography Pack (Cathlab)",sku:"AHCIAG10",d:"Cardiac cath-lab procedure pack with full-body angiography drape and table cover.",f:"Reinforced",s:"Large",st:true},
+    {n:"Universal Surgical Pack",sku:"AHGSUP10",d:"All-purpose general-surgery pack configurable for a wide range of procedures.",f:"SMS",s:"",st:true},
+    {n:"THR Patient Pack",sku:"AHORTHE21",d:"Total hip replacement pack with limb stockinette, U-drape and reinforced zones.",f:"Reinforced",s:"Large",st:true},
+    {n:"General Surgery Pack",sku:"AHGSGS10",d:"Standard laparotomy pack with mayo cover, gowns and absorbent towels.",f:"SMS",s:"Medium",st:true},
+    {n:"Caesarean Section Pack",sku:"AHGSCS10",d:"Obstetric LSCS pack with fluid-collection pouch and reinforced delivery drape.",f:"SMS",s:"Medium",st:true},
+    {n:"Cardiac (CABG) Pack",sku:"AHCICB10",d:"Open-heart procedure pack with split sheet, arm-board covers and large back table.",f:"Reinforced",s:"Large",st:true},
+    {n:"Arthroscopy Pack",sku:"AHORAR10",d:"Knee/shoulder arthroscopy pack with fluid-control drape and pouch.",f:"SMS",s:"Medium",st:true},
+    {n:"Ophthalmic Cataract Pack",sku:"AHEYOP10",d:"Eye-surgery pack with aperture drape, instrument wipe and fluid pouch.",f:"Poly",s:"Small",st:true},
+    {n:"Labour Room Delivery Pack",sku:"AHGSDP10",d:"Normal-delivery pack with under-buttock drape, cord clamp and baby towel.",f:"SMS",s:"",st:true},
+    {n:"Laparoscopy Pack",sku:"AHGSLP10",d:"Minimal-access pack with lithotomy drape, camera-cord cover and pouches.",f:"Reinforced",s:"Large",st:true}
   ];
   var grid=document.getElementById('grid');
   grid.innerHTML=products.map(function(p){
-    return '<div class="prod"><div class="ph"><span class="tag">Surgical Packs</span>'+STERILE+GLYPH+WM+'</div>'+
-      '<div class="body"><h3>'+p.n+'</h3><div class="sku">SKU · '+p.sku+'</div>'+
-      '<p>'+p.d+'</p><div class="meta">'+p.m.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div>'+
-      '<a href="#" class="btn btn-outline btn-sm">Request a Catalog</a></div></div>';
+    var tags=[];
+    if(p.f)tags.push(p.f);
+    if(p.s)tags.push(p.s);
+    tags.push(p.st?'Sterile':'Unsterile');
+    return '<div class="prod"><div class="ph"><span class="tag">Surgical Packs</span>'+(p.st?STERILE:'')+GLYPH+WM+'</div>'+
+      '<div class="body"><h3><a href="/product.html">'+p.n+'</a></h3><div class="sku">SKU · '+p.sku+'</div>'+
+      '<p>'+p.d+'</p><div class="meta">'+tags.map(function(x){return '<span>'+x+'</span>'}).join('')+'</div>'+
+      '<a href="/product.html" class="btn btn-outline btn-sm">View product</a></div></div>';
   }).join('');
 
   // sticky header
